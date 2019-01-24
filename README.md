@@ -1,2 +1,2 @@
-# myComp
+# mycomp
 TS Components
