@@ -1,0 +1,2 @@
+# myComp
+TS Components
