@@ -19,7 +19,7 @@
  * 17. timeFormat      时间格式化
  * 18. timeBefore      获取n天前后时间
  * 19. getDateDiff     计算时间差
- *
+ * 20. prevAllUntil  nextAllUntil  获取前后兄弟元素,直到为until
  */
 
 var tjs = {
@@ -520,6 +520,7 @@ var tjs = {
 		}());
 	},
 
+
 	/**
 	 * 判断浏览器版本
 	 */
@@ -540,6 +541,7 @@ var tjs = {
         return result;
     },
 
+
 	/**
 	 * 去字符串两端空格
 	 */
@@ -550,7 +552,39 @@ var tjs = {
             i = str.length;
         while (ws.test(str.charAt(--i)));
         return str.slice(0, i + 1);
-    }
+    },
+
+
+    /**
+	 *  获取前后兄弟元素,直到为until
+     * @param elem
+     * @param dir
+     * @param until
+     * @returns {Array}
+     */
+    dir( elem, dir, until ) {
+		var matched = [],
+			cur = elem[ dir ];
+		while ( cur && cur.nodeType !== 9 && (until === undefined || cur.nodeType !== 1 || !tjs.hasClass(cur, until)) ) {
+			if ( cur.nodeType === 1 ) {
+				matched.unshift( cur );
+			}
+			cur = cur[dir];
+		}
+		// console.log(matched)
+		return matched;
+	},
+ 	prevAllUntil(elem, until) { // 获取前面兄弟元素,直到为until
+		return dir( elem, "previousElementSibling", until);
+	},
+	nextAllUntil(elem, until) { // 获取后面兄弟元素,直到为until
+    	return dir( elem, "nextElementSibling", until);
+	}
+
+
+
+
+
 }
 
 

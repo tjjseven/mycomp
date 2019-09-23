@@ -7,128 +7,120 @@
 // };
 tjs.reqAniFrame()
 
-/*table 更多*/
-var tableTools = document.querySelectorAll('.t-table .t-icon-item'),moreTools = document.querySelectorAll('.t-other-item')
-for (var i = 0; i < tableTools.length; i++) {
-    (function (i) {
-        tableTools[i].onclick = function () {
-            for (var j = 0; j < moreTools.length; j++) {
-                moreTools[j].style.opacity = 0
-                moreTools[j].style.zIndex = -1
-                tableTools[j].children[0].setAttribute('xlink:href', '#icon-down')
-                // 关闭
-                if(parseInt(tjs.getStyle(moreTools[i], 'opacity'))){
-                    moreTools[i].style.zIndex = 0
-                    this.children[0].setAttribute('xlink:href', '#icon-down')
-                    console.log(1)
-                // 展开
-                }else{
-                    moreTools[i].style.cssText += ';z-index:1;opacity:1'
-                    // moreTools[i].style.opacity = 1
-                    this.children[0].setAttribute('xlink:href', '#icon-up')
-                    console.log(2)
-                }
-            }
-        }
-    }(i))
-}
-
-/*input*/
-function inputCom() {
-    var sendCode = document.querySelector('.t-input-verify>label');
-    if(!sendCode)return
-    sendCode.onclick = function () {
-        var flag = 60, that = this;
-        if(that.innerHTML !== '获取验证码'){
-            return
-        }
-        that.innerHTML = flag + '秒后重新发送'
-        var timer = setInterval(function () {
-            flag--;
-            that.innerHTML = flag + '秒后重新发送'
-            if(flag === 0){
-                clearInterval(timer)
-                that.innerHTML = '获取验证码'
-            }
-        }, 1000)
-    }
-    // tjs.throttle()
-}
-inputCom()
-
-/*select*/
-function selectCom() {
-    var sel = document.querySelectorAll('.t-select>p'), optionItem = document.querySelectorAll('.t-select>ul>li'),
-        option = document.querySelectorAll('.t-select>ul'), optionIcon = document.querySelectorAll('.t-select>.t-select-icon');
-
-    for (var j = 0; j < optionItem.length; j++) {
-        (function (i) {
-            optionItem[i].onclick =  function () {
-                // console.log(i);
-                var that = this
-                this.parentNode.previousElementSibling.innerHTML = this.innerHTML;
-                tjs.removeClass(this.parentNode, 'transitionDropIn')
-                tjs.addClass(this.parentNode, 'transitionDropOut')
-                setTimeout(function () {
-                    that.parentNode.style.display = 'none'
-                },500)
-            }
-        }(j))
-    }
-    for (var k = 0; k < sel.length; k++) {
-        // console.log(option[k])
-        sel[k].innerHTML = option[k].firstElementChild.innerHTML;
-        (function (i) {
-            optionIcon[i].onclick = sel[i].onclick = function () {
-                for (var j = 0; j < sel.length; j++) {
-                    option[j].style.display = 'none'
-                }
-                option[i].style.display = 'block'
-                tjs.removeClass(option[i], 'transitionDropOut')
-                tjs.addClass(option[i], 'transitionDropIn')
-            }
-        }(k))
-    }
-}
-selectCom()
-
-/*radio*/
-function radioCom() {
-    var radio = document.querySelectorAll('.t-radio');
-    for (var i = 0; i < radio.length; i++) {
-        radio[i].querySelector('label').onclick = function () {
-            var use = this.parentNode.parentNode.querySelectorAll('use')
-            for (var j = 0; j < use.length; j++) {
-                use[j].setAttribute('xlink:href', '#icon-mxz1')
-            }
-            this.previousElementSibling.firstElementChild.setAttribute('xlink:href', '#icon-xz1')
-        }
-    }
-}
-radioCom()
-
-/*checkbox*/
-function checkboxCom() {
-    var checkbox = document.querySelectorAll('.t-checkbox');
-    for (var i = 0; i < checkbox.length; i++) {
-        checkbox[i].querySelector('label').onclick = function () {
-            // var use = this.parentNode.parentNode.querySelectorAll('use')
-            if(this.previousElementSibling.firstElementChild.getAttribute('xlink:href') === '#icon-dmxz'){
-                this.previousElementSibling.firstElementChild.setAttribute('xlink:href', '#icon-dxz')
-            }else{
-                this.previousElementSibling.firstElementChild.setAttribute('xlink:href', '#icon-dmxz')
-            }
-        }
-    }
-}
-checkboxCom()
-
-
-
 
 class TS {
     constructor(){
 
+    }
+    /*table*/
+    tableCom () {
+        /*table 更多*/
+        var tableTools = document.querySelectorAll('.t-table .t-icon-item'),moreTools = document.querySelectorAll('.t-other-item')
+        for (var i = 0; i < tableTools.length; i++) {
+            (function (i) {
+                tableTools[i].onclick = function () {
+                    for (var j = 0; j < moreTools.length; j++) {
+                        moreTools[j].style.opacity = 0
+                        moreTools[j].style.zIndex = -1
+                        tableTools[j].children[0].setAttribute('xlink:href', '#icon-down')
+                        // 关闭
+                        if(parseInt(tjs.getStyle(moreTools[i], 'opacity'))){
+                            moreTools[i].style.zIndex = 0
+                            this.children[0].setAttribute('xlink:href', '#icon-down')
+                            console.log(1)
+                            // 展开
+                        }else{
+                            moreTools[i].style.cssText += ';z-index:1;opacity:1'
+                            // moreTools[i].style.opacity = 1
+                            this.children[0].setAttribute('xlink:href', '#icon-up')
+                            console.log(2)
+                        }
+                    }
+                }
+            }(i))
+        }
+    }
+    /*input*/
+    inputCom() {
+        var sendCode = document.querySelector('.t-input-verify>label');
+        if(!sendCode)return
+        sendCode.onclick = function () {
+            var flag = 60, that = this;
+            if(that.innerHTML !== '获取验证码'){
+                return
+            }
+            that.innerHTML = flag + '秒后重新发送'
+            var timer = setInterval(function () {
+                flag--;
+                that.innerHTML = flag + '秒后重新发送'
+                if(flag === 0){
+                    clearInterval(timer)
+                    that.innerHTML = '获取验证码'
+                }
+            }, 1000)
+        }
+        // tjs.throttle()
+    }
+    /*select*/
+    selectCom() {
+        var sel = document.querySelectorAll('.t-select>p'), optionItem = document.querySelectorAll('.t-select>ul>li'),
+            option = document.querySelectorAll('.t-select>ul'), optionIcon = document.querySelectorAll('.t-select>.t-select-icon');
+
+        for (var j = 0; j < optionItem.length; j++) {
+            (function (i) {
+                optionItem[i].onclick =  function () {
+                    // console.log(i);
+                    var that = this
+                    this.parentNode.previousElementSibling.innerHTML = this.innerHTML;
+                    tjs.removeClass(this.parentNode, 'transitionDropIn')
+                    tjs.addClass(this.parentNode, 'transitionDropOut')
+                    setTimeout(function () {
+                        that.parentNode.style.display = 'none'
+                    },500)
+                }
+            }(j))
+        }
+        for (var k = 0; k < sel.length; k++) {
+            // console.log(option[k])
+            sel[k].innerHTML = option[k].firstElementChild.innerHTML;
+            (function (i) {
+                optionIcon[i].onclick = sel[i].onclick = function () {
+                    for (var j = 0; j < sel.length; j++) {
+                        option[j].style.display = 'none'
+                    }
+                    option[i].style.display = 'block'
+                    tjs.removeClass(option[i], 'transitionDropOut')
+                    tjs.addClass(option[i], 'transitionDropIn')
+                }
+            }(k))
+        }
+    }
+    /*radio*/
+    radioCom() {
+        var radio = document.querySelectorAll('.t-radio');
+        for (var i = 0; i < radio.length; i++) {
+            radio[i].querySelector('label').onclick = function () {
+                var use = this.parentNode.parentNode.querySelectorAll('use')
+                for (var j = 0; j < use.length; j++) {
+                    use[j].setAttribute('xlink:href', '#icon-mxz1')
+                }
+                this.previousElementSibling.firstElementChild.setAttribute('xlink:href', '#icon-xz1')
+            }
+        }
+    }
+    /*checkbox*/
+    checkboxCom() {
+        var checkbox = document.querySelectorAll('.t-checkbox');
+        for (var i = 0; i < checkbox.length; i++) {
+            checkbox[i].querySelector('label').onclick = function () {
+                // var use = this.parentNode.parentNode.querySelectorAll('use')
+                if(this.previousElementSibling.firstElementChild.getAttribute('xlink:href') === '#icon-dmxz'){
+                    this.previousElementSibling.firstElementChild.setAttribute('xlink:href', '#icon-dxz')
+                }else{
+                    this.previousElementSibling.firstElementChild.setAttribute('xlink:href', '#icon-dmxz')
+                }
+            }
+        }
     }
 
     /**
@@ -980,6 +972,423 @@ class TS {
         })
     }
 
+    /**
+     * 文件上传
+     */
+    upLoad(){
+        document.querySelector('.t-input-file').onchange = function (event) {
+            // var e = event || window.event
+            console.log(this.files)
+            var fr = new FileReader(), file = this.files[0];
+            //判断文件的类型
+            if (file.type.match(/^text\//) !== null) {
+                //读取文本文件
+                // readText(fr, file);
+            } else if (file.type.match(/^image\//) !== null) {
+                //读取图片
+                readImage(fr, file);
+            } else {
+                alert("你上传的文件格式无法读取");
+            }
+            console.log(fr)
+            document.querySelector('.t-upload span').innerHTML = this.files[0].name
+        }
+
+        // * 读取图片
+        function readImage(frObj, fileObj) {
+            frObj.onload = function(){
+                var img = document.querySelector('.t-upload-div img')
+                if(img){
+                    img.src = frObj.result
+                }else{
+                    img = document.createElement("img");
+                    img.src = frObj.result;
+                }
+                document.querySelector(".t-upload-div").insertBefore(img, document.querySelector(".t-upload"));
+            }
+            frObj.readAsDataURL(fileObj);
+        }
+
+        // * 读取文本
+        function readText(frObj, fileObj) {
+            frObj.onload = function(){
+                var pre = document.createElement("pre");
+                pre.innerHTML = frObj.result;
+                // document.querySelector(".t-upload").appendChild(pre);
+                document.querySelector(".t-upload-div").insertBefore(pre, document.querySelector(".t-upload"))
+            };
+            frObj.readAsText(fileObj);
+        }
+    }
+
+    /**
+     * 分页
+     * @param obj
+     */
+    paging(obj) {
+        var pagEle = document.querySelector('.t-paging'), dataArr, targetBgNum, pageSize = obj.pageSize || 10, pageNum = Math.ceil(obj.totalSize/pageSize);
+        pagEle.onclick = function (event) {
+            var e = event || window.event, pagEleA = document.querySelectorAll('.t-paging a'), pagingNext = document.querySelector('.paging-next');
+            if(e.target.nodeName === 'A'){ // 点击数字btn
+                var pagingPre = document.querySelector('.paging-pre'),
+                    targetIndex;
+                for (var j = 0; j < pagEleA.length; j++) {
+                    // 找到有bg的a
+                    if (tjs.hasClass(pagEleA[j], 't-bg')) {
+                        targetBgNum = parseInt(pagEleA[j].innerText)
+                        targetIndex = j
+                    }
+                }
+                // console.log(targetIndex)
+                if(tjs.hasClass(e.target, 'paging-pre')){ // 上一页
+                    if(tjs.hasClass(pagEleA[targetIndex].previousElementSibling, 'not-allowed-first')){
+                        setPag(pagEleA[targetIndex], pagEleA, pagingNext)
+                        // console.log('点击上一页（当前页的前面是···）')
+                    }else{
+                        if(targetBgNum !== 1){
+                            // console.log('点击上一页（当前页的前面不是first···也不是1）')
+                            setPag(pagEleA[targetIndex].previousElementSibling, pagEleA, pagingNext)
+                        }
+                    }
+                }else if(tjs.hasClass(e.target, 'paging-next')){ // 下一页
+                    if(tjs.hasClass(pagEleA[targetIndex].nextElementSibling, 'not-allowed-last')){
+                        setPag(pagEleA[targetIndex], pagEleA, pagingNext)
+                        // console.log('点击下一页（当前页的后面是···）')
+                    }else{
+                        if(targetBgNum !== pageNum){
+                            // console.log('点击下一页（当前页的后面不是last···也不是尾页）')
+                            setPag(pagEleA[targetIndex].nextElementSibling, pagEleA, pagingNext)
+                        }
+                    }
+                }else{
+                    setPag(e.target, pagEleA, pagingNext)
+                    // console.log('点击其他数字页')
+                }
+
+                obj.callBack(dataArr)
+                // 判断当前页是否为首尾页
+                for (var q = 0; q < pagEleA.length; q++) {
+                    // 找到有bg的a
+                    if(tjs.hasClass(pagEleA[q], 't-bg')){
+                        targetBgNum = parseInt(pagEleA[q].innerText)
+                        // console.log(targetBgNum)
+                        if(targetBgNum === 1){
+                            tjs.addClass(pagingPre, 't-not-allowed')
+                        }else{
+                            if(tjs.hasClass(pagingPre, 't-not-allowed')){
+                                tjs.removeClass(pagingPre, 't-not-allowed')
+                            }
+                        }
+                        if(targetBgNum === pageNum){
+                            tjs.addClass(pagingNext, 't-not-allowed')
+                        }else{
+                            if(tjs.hasClass(pagingNext, 't-not-allowed')){
+                                tjs.removeClass(pagingNext, 't-not-allowed')
+                            }
+                        }
+                    }
+                }
+
+            }
+            // 定点跳转
+            if(obj.assign){
+                var assign = document.querySelector('.t-paging>input').value, hasArr = [];
+
+                if(e.target.nodeName === 'BUTTON'){
+                    for (var i = 0; i < pagEleA.length; i++) {
+                        // console.log(parseInt(pagEleA[i].innerText))
+                        hasArr.push(pagEleA[i].innerText)
+                    }
+                    if(assign !==1){
+                        tjs.removeClass(document.querySelector('.paging-pre'), 't-not-allowed')
+                    }
+                    // console.log(hasArr.indexOf(assign)=== -1)
+                    if(hasArr.indexOf(assign) === -1){
+                        if(assign > pageNum){
+                            alert('查无此页')
+                            return
+                        }
+                        for (var i = 0; i < pagEleA.length; i++) { // 此处重点
+                            tjs.removeClass(pagEleA[i], 't-bg')
+                        }
+                        var naFirst = document.querySelector('.not-allowed-first'),
+                            naLast = document.querySelector('.not-allowed-last'),
+                            firstItem = document.querySelector('.first-item'),
+                            target = document.createElement('a');
+                        target.innerHTML = assign
+                        // console.log(target)
+                        if(naLast){
+                            var allA = tjs.prevAllUntil(naLast, 'not-allowed-first'); // 获取两个···中间的a
+                        }
+                        lastBefore(allA, target, pagingNext, firstItem, naFirst, naLast)
+                        if(assign <= pageNum - 5){
+                            naLast.style.display = 'inline-block'
+                            pagingNext.previousElementSibling.style.display = 'inline-block'
+                        }
+                    }else{
+                        setPag(pagEleA[hasArr.indexOf(assign)], pagEleA, pagingNext)
+                    }
+                    obj.callBack(dataArr)
+                    // seag(pagEleA[i], pagEleA, pagingNext)
+
+                }
+            }
+
+        }
+        if(obj.limit){
+            pagEle.onchange = function (event) {
+                var e = event || window.event;
+                if(e.target.nodeName === 'SELECT'){
+                    var selVal = document.querySelector('.t-paging>select')
+                    // console.log(selVal)
+                    pageSize = selVal.options[selVal.selectedIndex].value
+                    pageNum = Math.ceil(obj.totalSize/pageSize)
+                    console.log(pageSize)
+                    dataArr = showData(1, true)
+                    obj.callBack(dataArr)
+                    document.querySelector('.t-paging>select').options[selVal.options[selVal.selectedIndex].index].setAttribute('selected', 'selected')
+                }
+            }
+        }
+
+        function setPag(target, pagEleA, pagingNext) {
+            if(tjs.hasClass(target, 't-not-allowed'))return
+            for (var i = 0; i < pagEleA.length; i++) { // 此处重点
+                tjs.removeClass(pagEleA[i], 't-bg')
+            }
+            var isLastPre = tjs.hasClass(target.nextElementSibling, 'not-allowed-last'),
+                isFirstNext = tjs.hasClass(target.previousElementSibling, 'not-allowed-first'),
+                // isFirstPre = tjs.hasClass(target.nextElementSibling, 'not-allowed-first'),
+                naFirst = document.querySelector('.not-allowed-first'),
+                naLast = document.querySelector('.not-allowed-last'),
+                firstItem = document.querySelector('.first-item');
+            if(naLast){
+                var allA = tjs.prevAllUntil(naLast, 'not-allowed-first'); // 获取两个···中间的a
+            }
+            if(isLastPre && tjs.getStyle(naLast, 'display') === 'inline-block'){ // 判断是否是last···前一位a
+                lastBefore(allA, target, pagingNext, firstItem, naFirst, naLast)
+            }else if(isFirstNext && tjs.getStyle(naFirst, 'display') === 'inline-block'){// 判断是否是first···后一位a
+                console.log('是前面省略号的后一位,并且省略号显示')
+                // 判断是否翻页到开头
+                if(parseInt(target.innerText) - 5 < 1){
+                    // 隐藏first···
+                    firstItem.style.display = 'none'
+                    naFirst.style.display = 'none'
+                }
+                // 显示隐藏的a
+                console.log(parseInt(target.innerText))
+                if(parseInt(target.innerText) !== 1){
+                    for (var p = allA.length - 1; p >= 0; p--) {
+                        // 自动页数--
+                        allA[p].innerHTML = target.innerHTML--
+                        if(tjs.getStyle(allA[p], 'display') === 'none'){
+                            allA[p].style.display = 'inline-block'
+                        }
+                        if(parseInt(allA[p].innerText) <= 0){
+                            // console.log(parseInt(allA[p].innerText))
+                            allA[p].style.display = 'none'
+                            // console.log(allA[p])
+                        }else{
+                            allA[p].style.display = 'inline-block'
+                            // console.log('bug')
+                        }
+                    }
+                }
+                pagingNext.previousElementSibling.style.display = 'inline-block'
+                naLast.style.display = 'inline-block'
+                console.log(allA)
+                // 设置bg
+                tjs.addClass(allA[allA.length - 1], 't-bg')
+                dataArr = showData(allA[allA.length - 1].innerHTML)
+
+            }else{ // 其他class的a
+                console.log('是其他a')
+                // console.log(target.innerHTML)
+                if(parseInt(target.innerText) === 1){
+                    if(pageNum <= 7){
+                        tjs.addClass(pagEleA[3], 't-bg')
+                        dataArr = showData(target.innerHTML)
+                        return
+                    }
+                    console.log('首位a')
+                    // 隐藏first···
+                    firstItem.style.display = 'none'
+                    naFirst.style.display = 'none'
+                    for (var q = 0; q < allA.length; q++) {
+                        allA[q].innerHTML = q + 1
+                        if(parseInt(allA[q].innerHTML) === 1){
+                            tjs.addClass(allA[q], 't-bg')
+                        }
+                        // 显示隐藏的a
+                        if(tjs.getStyle(allA[q], 'display') === 'none'){
+                            allA[q].style.display = 'inline-block'
+                        }
+                    }
+                    pagingNext.previousElementSibling.style.display = 'inline-block'
+                    naLast.style.display = 'inline-block'
+                }
+                if(parseInt(target.innerText) === pageNum){
+                    if(pageNum <= 7){
+                        tjs.addClass(pagingNext.previousElementSibling, 't-bg')
+                        dataArr = showData(target.innerHTML)
+                        return
+                    }
+                    console.log('末位a')
+                    firstItem.style.display = 'inline-block'
+                    naFirst.style.display = 'inline-block'
+                    naLast.style.display = 'none'
+                    pagingNext.previousElementSibling.style.display = 'none'
+                    // 显示first···
+                    // 隐藏last
+                    // console.log(pagEndingArr)
+                    var length = pageNum - 4 * Math.ceil( pageNum/4 - 1 )
+                    var arr1 = []
+                    for (var x = 0; x < length; x++) {
+                        arr1.unshift(pageNum--)
+                    }
+                    console.log(arr1)
+                    pageNum = Math.ceil(obj.totalSize/pageSize)
+                    for (var y = 0; y < arr1.length; y++) {
+                        allA[y].innerHTML = arr1[y]
+                        if(parseInt(allA[y].innerHTML) === pageNum){
+                            tjs.addClass(allA[y], 't-bg')
+                            var hideA = tjs.nextAllUntil(allA[y], 't-not-allowed')
+                            for (var z = 0; z < hideA.length; z++) {
+                                hideA[z].style.display = 'none';
+                            }
+                        }
+                    }
+                }
+                if(parseInt(target.innerText) !== pageNum && parseInt(target.innerText) !== 1){
+                    tjs.addClass(target, 't-bg') //bug
+                    console.log(target.innerText)
+                }
+                dataArr = showData(target.innerHTML)
+            }
+        }
+
+        function lastBefore(allA, target, pagingNext, firstItem, naFirst, naLast) {
+            console.log('是后面省略号的前一位,并且省略号显示')
+            // 自动页数++
+            // 5    09    13    17    21    25    29       1
+            // 6    10    14    18    22    26    30       2
+            // 7    11    15    19    23    27    31       3
+            // 8    12    16    20    24    28    32       4
+            // 9    13    17    21    25    29    33       5
+            var tarText = target.innerText
+            if(target.innerText%4 === 2){
+                console.log('第二位')
+                setLocation(1)
+            }else if(target.innerText%4 === 3){
+                setLocation(2)
+            }else if(target.innerText%4 === 0){
+                setLocation(3)
+            }else{
+                console.log('第一位')
+                setLocation(0)
+            }
+            function setLocation(num) {
+                for (var k = num; k < allA.length; k++) {
+                    if(parseInt(allA[k].innerText) <= 0){
+                        allA[k].style.display = 'none'
+                    }else{
+                        allA[k].style.display = 'inline-block'
+                    }
+                    if(num === 1){
+                        allA[0].innerText = tarText - 1
+                    }else if(num ===2){
+                        allA[0].innerText = tarText - 2
+                        allA[1].innerText = tarText - 1
+                    }else if(num ===3){
+                        allA[0].innerText = tarText - 3
+                        allA[1].innerText = tarText - 2
+                        allA[2].innerText = tarText - 1
+                    }
+                    allA[k].innerText = target.innerText++
+                }
+                tjs.addClass(allA[num], 't-bg')
+                dataArr = showData(allA[num].innerText)
+            }
+
+            // 显示first···
+            firstItem.style.display = 'inline-block'
+            naFirst.style.display = 'inline-block'
+            console.log(parseInt(target.innerText))
+            if(parseInt(target.innerText) === pageNum){
+                naLast.style.display = 'none'
+                naLast.previousElementSibling.style.display = 'none'
+            }
+
+            // 判断是否翻页到结尾
+            if(parseInt(target.innerText) > pageNum){
+                var pagEndingArr = tjs.prevAllUntil(naLast, 't-bg')
+                // 隐藏多余的a
+                for (var m = 0; m < pagEndingArr.length; m++) {
+                    if(parseInt(pagEndingArr[m].innerText) > pageNum){
+                        var hideAArr = tjs.nextAllUntil(pagEndingArr[m], 'paging-next');
+                        for (var n = 0; n < hideAArr.length; n++) {
+                            pagEndingArr[m].style.display = 'none';
+                        }
+                    }
+                }
+                naLast.style.display = 'none'
+                pagingNext.previousElementSibling.style.display = 'none'
+                // console.log(parseInt(target.innerText) - pageNum)
+            }
+        }
 
 
+
+
+        // 初始化
+        dataArr = showData()
+        obj.callBack(dataArr)
+        // 渲染数据
+        function showData(arg, flag) { // arg 第几页数据
+            // console.log(arg)
+            //currentPage 为当前页数，pageSize为每页显示的数据量数，totalSize为总数据量数，startIndex开始条数，endIndex结束条数
+            var pagArr = [], currentPage = arg || 1,
+                startIndex = (currentPage - 1) * pageSize + 1,
+                endIndex = currentPage * pageSize,
+                aEles = '<a href="javascript:;" class="paging-pre t-not-allowed">上一页</a><a href="javascript:;" class="first-item">1</a>' +
+                    '<a href="javascript:;" class="t-not-allowed not-allowed-first">···</a>';
+            pagArr = arr.slice(startIndex - 1, endIndex)
+            // console.log(pagEle.hasChildNodes())
+            // 判断首次加载
+            if(flag){ // 切换显示数量
+                pagEle.innerHTML = ''
+            }else{ // 正常翻页
+                if(pagEle.hasChildNodes()) return pagArr
+            }
+            // 首次加载执行
+            var aLength = obj.totalSize > 7*pageSize ? 5 : pageNum;
+            for (var i = 1; i <= aLength; i++) {
+                if(i===1){
+                    aEles += '<a href="javascript:;" class="t-bg">'+ i + '</a>'
+                    // console.log(currentPage)
+                }else{
+                    aEles += '<a href="javascript:;">'+ i + '</a>'
+                }
+            }
+            if(obj.totalSize > 7*pageSize){
+                aEles += '<a href="javascript:;" class="t-not-allowed not-allowed-last">···</a><a href="javascript:;">'+ pageNum +'</a>'
+            }
+            aEles += '<a href="javascript:;" class="paging-next">下一页</a>'
+            if(obj.limit){
+                aEles += '<select>\n' +
+                    '<option value="10">10条/页</option>\n' +
+                    '<option value="20">20条/页</option>\n' +
+                    '<option value="30">30条/页</option>\n' +
+                    '<option value="40">40条/页</option>\n' +
+                    '<option value="50">50条/页</option>\n' +
+                    '</select>';
+            }
+            if(obj.assign){
+                aEles += '跳到第<input type="text" value=' + pageNum +' />页' + '<button class="t-btn">确定</button>';
+            }
+            pagEle.innerHTML += aEles
+            // console.log(document.querySelector('select').selectedIndex)
+            return pagArr
+        }
+    }
 }
