@@ -161,7 +161,7 @@
         <p class="newTime"></p>
         <p class="userBrowserInfo"></p>
         <p>引入css：&lt;link rel=&quot;stylesheet&quot; href=&quot;./ts.css&quot;/&gt;</p>
-        <p>引入js：&lt;script type=&quot;text/javascript&quot; src=&quot;./tools.js&quot;&gt;&lt;/script&gt;</p>
+        <p>引入js：&lt;script type=&quot;text/javascript&quot; src=&quot;./t.lib.js&quot;&gt;&lt;/script&gt;</p>
         <p>引入js：&lt;script type=&quot;text/javascript&quot; src=&quot;./ts.js&quot;&gt;&lt;/script&gt;</p>
         <p>初始化：var ts = new TS()</p>
     </div>
@@ -169,7 +169,7 @@
     <section id="page"></section>
 </div>
 
-<script type="text/javascript" src="utils/tools.js"></script>
+<script type="text/javascript" src="utils/t.lib.js"></script>
 <script type="text/javascript" src="utils/ts.js"></script>
 <script type="text/javascript">
     // window.onload = function () {
@@ -259,7 +259,7 @@
                 for (var k = 0; k < document.querySelectorAll('#page h2').length; k++) {
                     document.querySelector('aside>ul').innerHTML += '<li>' + (k+1) + '.' + document.querySelectorAll('#page h2')[k].innerHTML + '</li>'
                 }
-                // addScript("./utils/tools.js")
+                // addScript("./utils/t.lib.js")
                 // addScript("./utils/ts.js")
                 setTimeout(function () {
                     addScript("./js/index.js")
@@ -267,7 +267,7 @@
                 // console.log(ts)
                 // 路由变化
                 window.addEventListener('hashchange',function(e) {
-                    console.log(e)
+                    // console.log(e)
                     // console.log(e.oldURL);
                     // console.log(e.newURL)
                 }, false);

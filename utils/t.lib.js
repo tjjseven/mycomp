@@ -19,7 +19,11 @@
  * 17. timeFormat      时间格式化
  * 18. timeBefore      获取n天前后时间
  * 19. getDateDiff     计算时间差
- * 20. prevAllUntil  nextAllUntil  获取前后兄弟元素,直到为until
+ * 20. reqAniFrame     定时器
+ * 21. getBrowserInfo  判断浏览器版本
+ * 22. trim 		   去空格
+ * 23. prevAllUntil    获取前面兄弟元素,直到为until
+ * 24. nextAllUntil    获取后面兄弟元素,直到为until
  */
 
 var tjs = {
@@ -492,7 +496,7 @@ var tjs = {
 
 
     /**
-	 * requestAnimationFrame
+	 * requestAnimationFrame 定时器 60/s
      */
     reqAniFrame: function() {
 		(function() {
@@ -546,6 +550,9 @@ var tjs = {
 	 * 去字符串两端空格
 	 */
     trim : function(str) {
+    	if(str.trim){
+    		return str.trim()
+		}
         // var str = this,
 	  	var str = str.replace(/^\s\s*/, ''),
             ws = /\s/,
@@ -575,10 +582,10 @@ var tjs = {
 		return matched;
 	},
  	prevAllUntil(elem, until) { // 获取前面兄弟元素,直到为until
-		return dir( elem, "previousElementSibling", until);
+		return tjs.dir( elem, "previousElementSibling", until);
 	},
 	nextAllUntil(elem, until) { // 获取后面兄弟元素,直到为until
-    	return dir( elem, "nextElementSibling", until);
+    	return tjs.dir( elem, "nextElementSibling", until);
 	}
 
 

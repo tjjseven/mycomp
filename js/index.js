@@ -39,7 +39,7 @@ for (var i = 0; i < tCodeBtn.length; i++) {
 
 // 0 - auto height transition
 function funTransitionHeight(element, time) { // time, 数值，可缺省
-    if (typeof window.getComputedStyle === "undefined") return;
+    // if (typeof window.getComputedStyle === "undefined") return;
     var height = tjs.getStyle(element, 'height');
     // element.style.transition = "none";
     element.style.height = "auto";
@@ -68,7 +68,6 @@ ts.checkboxCom()
  * @param second 秒显示区
  * @param date 传入时间 "2017/12/12,1:41"
  */
-console.log(2)
 ts.backTimers({
     timer: '.t-timer',
     day: '.t-d',

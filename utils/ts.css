@@ -250,7 +250,11 @@ a, a:link, a:visited, a:hover, a:active{
     background: #f3f3f3;
 }
 .t-table a{
-    color: #05a6ff
+    color: #05a6ff;
+    font-size: 12px;
+}
+.t-table svg.t-icon-item{
+    vertical-align: middle;
 }
 .t-table thead th:last-child{
     width: 150px;
